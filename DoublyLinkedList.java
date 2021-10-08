@@ -11,6 +11,7 @@ public class DoublyLinkedList {
             Node temp = new Node(element);
             if(!isEmpty()){
                 temp.next = head;
+                this.head.prev = temp;
             }
             else{
                 this.tail = temp;
@@ -24,13 +25,9 @@ public class DoublyLinkedList {
                 this.addFirst(element);
                 return;
             }
-            Node current = this.head;
             Node newNode = new Node(element);
-
-            while(current.next != null){
-                current = current.next;
-            }
-            current.next = newNode;
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
             this.tail = newNode;
             this.size++;
         }
@@ -41,6 +38,9 @@ public class DoublyLinkedList {
             }
             int result = this.head.value;
             this.head = this.head.next;
+            if(size() > 1){
+                this.head.prev = null;
+            }
             this.size--;
             if(isEmpty()){
                 this.head = this.tail = null;
@@ -53,15 +53,9 @@ public class DoublyLinkedList {
                 return this.removeFirst();
             }
 
-            Node current = this.head;
-            int result = 0;
-
-            while(current.next.next != null){
-                current = current.next;
-            }
-            result = current.next.value;
-            current.next = null;
-            this.tail = current;
+            int result = this.tail.value;
+            this.tail = this.tail.prev;
+            this.tail.next = null;
             this.size--;
             return result;
         }
