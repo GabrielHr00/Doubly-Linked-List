@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class DoublyLinkedList {
+public class LinkedListTail {
         private Node head;
         private Node tail;
         private int size;
@@ -98,6 +98,19 @@ public class DoublyLinkedList {
                 current = current.next;
             }
         }
+
+//    public int[] toArray(){
+//        int[] array = new int[this.size];
+//        int counter = 0;
+//        Node current = this.head;
+//
+//        while(current != null){
+//            array[counter] = current.value;
+//            current = current.next;
+//            counter++;
+//        }
+//        return array;
+//    }
 
         public int[] toArray() {
             List<Integer> list = new ArrayList<>();
