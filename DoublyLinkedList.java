@@ -64,21 +64,20 @@ public class DoublyLinkedList {
             if(isEmpty() || !checkIndex(index)){
                 throw new IllegalStateException("There is no such element on this position!");
             }
-            if(index == 0){
-                return this.head.value;
-            }
-            int result = 0;
-            int currentIndex = 0;
-            Node current = this.head;
-            while(current != null){
-                if(currentIndex == index){
-                    result = current.value;
-                    break;
+            Node current;
+            if(index <= this.size / 2){
+                current = this.head;
+                for (int i = 0; i < index; i++) {
+                    current = current.next;
                 }
-                currentIndex++;
-                current = current.next;
             }
-            return result;
+            else{
+                current = this.tail;
+                for (int i = size - 1; i > index; i--) {
+                    current = current.prev;
+                }
+            }
+            return current.value;
         }
 
         private boolean checkIndex(int index){
